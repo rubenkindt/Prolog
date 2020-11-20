@@ -1,8 +1,0 @@
-change workspace to correct location
-then [prologFile].
-
-
-updated prologfile: make.
-debug: 	trace.
-	guitracer.
-	debug.
