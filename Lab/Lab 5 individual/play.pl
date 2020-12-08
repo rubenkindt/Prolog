@@ -37,7 +37,7 @@ validNrow2([block(Nr,Color)|Tail],Nr,Color):-
 
 %playgame(P1(Blocks,Action),P2(Blocks,Action),Table,Bag)
 playgame(p1([],draw),p2([],draw),_Table,_Bag).
-playgame(p1([],win),p2(_Blocks2,lose),_Table,_Bag).
+playgame(p1([],win),p2(_Blocks2,lose),_Table,_Bag). % player2 has some blocks is [_|_], saying that he has _blocks2 can mean that he has [] blocks
 playgame(p1(_Blocks1,lose),p2([],win),_Table,_Bag).
 playgame(p1(_Blocks1,draw),p2(_Blocks2,draw),_Table,[]).
 
@@ -53,7 +53,7 @@ playgame2(p1(AllBlocks,[Action|Actions1]),P2,Table,Bag,1):-
 	xor( 
 		(
 			addNrow(AllBlocks,NewAllblocks,Action,Nrow),
-			playgame2(p1(NewAllblocks,Actions1),P2,[Nrow|Table],Bag,2)
+			playgame2(p1(NewAllblocks,Actions1),P2,[Nrow|Table],Bag,2) % i think we should call playgame here not playgame2
 		)
 		;
 		(
@@ -111,7 +111,7 @@ playBlock(AllBlocks,NewAllBlocks,Action,Table,NewTable):-
 playBlockToNrow(AllBlocks,NewAllBlocks,Action,Table,[nrow(Row)|TableWhRow]):-
 	select(Block,AllBlocks,NewAllBlocks),
 	select(nrow(Row),Table,TableWhRow),
-	append(Block,nrow(Row),NewRow),
+	append(Block,nrow(Row),NewRow), % hier appenden we Block to Nrow(row) dit gaat niet, we moeten block appenden met row en daarna Newrow als nrow(Row)) zoals [Block|Row]
 	sort(NewRow,SortedNewRow),
 	validNrow(SortedNewRow),
 	Action=playblock(Block,SortedNewRow).
@@ -119,7 +119,7 @@ playBlockToNrow(AllBlocks,NewAllBlocks,Action,Table,[nrow(Row)|TableWhRow]):-
 playBlockToCrow(AllBlocks,NewAllBlocks,Action,Table,[crow(Row)|TableWhRow]):-
 	select(Block,AllBlocks,NewAllBlocks),
 	select(crow(Row),Table,TableWhRow),
-	append(Block,crow(Row),NewRow),
+	append(Block,crow(Row),NewRow), % hier appenden we Block to Nrow(row) dit gaat niet, we moeten block appenden met row en daarna Newrow als nrow(Row)) zoals [Block|Row]
 	sort(NewRow,SortedNewRow),
 	validNrow(SortedNewRow),
 	Action=playblock(Block,SortedNewRow).
