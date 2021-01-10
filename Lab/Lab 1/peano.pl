@@ -23,3 +23,7 @@ max(X,zero,X).
 max(zero,Y,Y).
 max(s(X),s(Y),s(Z)):-
    max(X,Y,Z).
+   
+%wrong name for testfile
+maximum(X,Y,Z):-
+    max(X,Y,Z).
