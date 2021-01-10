@@ -69,20 +69,6 @@ check_colors_at(Node) :-
     NColor > N / 2)
   ).
 
-check_colors_at2(Node) :- Node = 1.
-check_colors_at2(Node) :-
-  degree(Node,N),
-  (
-    color(Node,Color),
-    findall(
-      Color,
-      (highway(Node,_,Color);highway(_,Node,Color)),
-      ColorConnections),
-    length(ColorConnections,NColor),
-    NColor =< N / 2)
-  .
-
-
 % tour/1: returns the smallest tour
 tour(T) :-
   check,
